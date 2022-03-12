@@ -20,7 +20,7 @@ import com.redsky.myretail.service.ProductService;
 @RequestMapping("/")
 public class ProductDetailsController {
 
-    private Logger logger = LoggerFactory.getLogger(ProductDetailsController.class);
+    private final Logger logger = LoggerFactory.getLogger(ProductDetailsController.class);
 
     @Autowired
     private ProductService productService;
@@ -55,8 +55,7 @@ public class ProductDetailsController {
     // Update Product's Price
     @PutMapping(value = "products/{id}")
     public ResponseEntity<Product> updateProductPriceById(@RequestBody final Product productRequest,
-                                                          @PathVariable final int id)
-            throws Exception {
+                                                          @PathVariable final int id) throws Exception {
         Product product = null;
 
         try {

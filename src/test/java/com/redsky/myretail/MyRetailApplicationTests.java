@@ -9,7 +9,6 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 
 import java.math.BigDecimal;
 
-import com.redsky.myretail.MyRetailApplication;
 import com.redsky.myretail.domain.Product;
 import com.redsky.myretail.domain.ProductObject;
 import com.redsky.myretail.domain.ProductPrice;
@@ -17,6 +16,8 @@ import com.redsky.myretail.repository.ProductRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -32,6 +33,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @WebAppConfiguration
 public class MyRetailApplicationTests {
 
+	Logger logger = LoggerFactory.getLogger(MyRetailApplicationTests.class);
+
 	@Autowired
 	ProductRepository repository;
 
@@ -42,7 +45,7 @@ public class MyRetailApplicationTests {
 
 	final static private int successfulID = 13860428;
 
-	private ProductObject productRO;
+	private ProductObject productObject;
 
 	@Before
 	public void setUp() {
@@ -50,12 +53,12 @@ public class MyRetailApplicationTests {
 
 		this.repository.deleteAll();
 
-		this.productRO = new ProductObject(successfulID);
-		this.productRO.setTitle("The Big Lebowski (Blu-ray)");
-		this.productRO.setCurrencyCode("USD");
-		this.productRO.setProductPrice(new BigDecimal(14.95));
+		this.productObject = new ProductObject(successfulID);
+		this.productObject.setTitle("The Big Lebowski (Blu-ray)");
+		this.productObject.setCurrencyCode("USD");
+		this.productObject.setProductPrice(new BigDecimal(14.95));
 
-		repository.save(productRO);
+		repository.save(productObject);
 		repository.findAll().forEach(System.out::println);
 	}
 
