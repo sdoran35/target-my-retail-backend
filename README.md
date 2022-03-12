@@ -152,7 +152,14 @@ Content-Type: application/json
 ```
 **Request:**
 ```
-   { "id": 13860428, "name": "The Big Lebowski (Blu-ray)", "current_price": { "value": "11.99", "currency_code": "USD" } }
+   {
+	"id": 13860428,
+	"name": "The Big Lebowski (Blu-ray)",
+	"product_price": {
+		"value": "11.99",
+		"currency_code": "USD"
+	}
+}
 ```
 The product price has now been updated.
 
