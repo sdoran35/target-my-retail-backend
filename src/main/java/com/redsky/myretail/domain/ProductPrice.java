@@ -13,16 +13,16 @@ public class ProductPrice {
     @JsonProperty("currency_code")
     protected String currencyCode;
 
-    public ProductPrice() {
-        //default, empty constructor
-    }
-
-    public ProductPrice(final BigDecimal price,
-                        final String currencyCode) {
-
-        this.price = price;
-        this.currencyCode = currencyCode;
-    }
+//    public ProductPrice() {
+//        //default, empty constructor
+//    }
+//
+//    public ProductPrice(final BigDecimal price,
+//                        final String currencyCode) {
+//
+//        this.price = price;
+//        this.currencyCode = currencyCode;
+//    }
 
     public BigDecimal getPrice() {
         return price;

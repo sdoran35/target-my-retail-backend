@@ -7,6 +7,7 @@ import com.redsky.myretail.dao.ProductDAO;
 import com.redsky.myretail.domain.Product;
 import com.redsky.myretail.domain.ProductObject;
 import com.redsky.myretail.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -21,22 +22,27 @@ import java.util.Properties;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    private final ProductDAO productDAO;
-    private final ProductRepository productRepository;
+    @Autowired
+    private ProductDAO productDAO;
+
+    @Autowired
+    private ProductRepository productRepository;
+
+//    @Autowired
+//    private Properties properties;
+
     RestTemplate restTemplate = new RestTemplate();
-    private final Properties properties;
+    private static final String HOST = "http://redsky.target.com/v1/pdp/tcin/";
+    private static final String EXCLUDES_PATH = "?excludes=taxonomy,price,promotion,bulk_ship,rating_and_review_reviews,rating_and_review_statistics,question_answer_statistics";
 
-    public ProductServiceImpl(final ProductDAO productDAO,
-                              final ProductRepository productRepository) {
 
-        this.productDAO = productDAO;
-        this.productRepository = productRepository;
-        this.properties = System.getProperties();
-    }
 
+//    public String getURI(final int productId) {
+//        return properties.getProperty("api.host") + productId + properties.getProperty("api.excludes");
+//    }
 
     public String getURI(final int productId) {
-        return properties.getProperty("api.host") + productId + properties.getProperty("api.excludes");
+        return HOST + productId + EXCLUDES_PATH;
     }
 
     public Product getProductById(final int id) throws JsonProcessingException, IOException {
@@ -83,7 +89,9 @@ public class ProductServiceImpl implements ProductService {
         currentProduct.setProductPrice(productObject.getProductPrice());
 
         // update the product in the database
-        return productDAO.productDetails(productRepository.updateProduct(currentProduct));
+        ProductObject updatedProduct = productRepository.save(currentProduct);
+
+        return productDAO.productDetails(updatedProduct);
     }
 
 }

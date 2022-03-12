@@ -13,5 +13,5 @@ public interface ProductRepository extends MongoRepository<ProductObject, String
     public ProductObject findByProductId(final int productId);
 
     @SuppressWarnings("unchecked")
-    public ProductObject updateProduct(final ProductObject productObject);
+    public ProductObject save(final ProductObject productObject);
 }

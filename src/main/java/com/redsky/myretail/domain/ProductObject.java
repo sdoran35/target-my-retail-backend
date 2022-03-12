@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-@Document(collation = "Product")
+@Document(collection = "Product")
 public class ProductObject {
 
     @Id

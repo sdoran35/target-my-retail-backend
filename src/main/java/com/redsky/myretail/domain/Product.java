@@ -15,18 +15,18 @@ public class Product {
     @JsonProperty("product_price")
     private ProductPrice productPrice;
 
-    public Product() {
-        //default, empty constructor
-    }
-
-    public Product(final int id,
-                   final String name,
-                   final ProductPrice productPrice) {
-
-        this.id = id;
-        this.name = name;
-        this.productPrice = productPrice;
-    }
+//    public Product() {
+//        //default, empty constructor
+//    }
+//
+//    public Product(final int id,
+//                   final String name,
+//                   final ProductPrice productPrice) {
+//
+//        this.id = id;
+//        this.name = name;
+//        this.productPrice = productPrice;
+//    }
 
     public int getId() {
         return id;

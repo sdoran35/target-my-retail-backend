@@ -10,21 +10,21 @@ public class ProductDAO {
 
     public Product productDetails(final ProductObject productObject) {
 
-        Product productObjectData = null;
+        Product product = null;
 
         if(productObject != null) {
-            productObjectData = new Product();
+            product = new Product();
 
-            productObjectData.setId(productObject.getProductId());
-            productObjectData.setName(productObject.getTitle());
+            product.setId(productObject.getProductId());
+            product.setName(productObject.getTitle());
 
             ProductPrice productPrice = new ProductPrice();
             productPrice.setCurrencyCode(productObject.getCurrencyCode());
             productPrice.setPrice(productPrice.getPrice());
-            productObjectData.setProductPrice(productPrice);
+            product.setProductPrice(productPrice);
         }
 
-        return productObjectData;
+        return product;
     }
 
     public ProductObject productObject(final Product product) {
