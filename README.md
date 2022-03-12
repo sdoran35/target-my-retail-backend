@@ -88,7 +88,7 @@ use demo
 
 And then enter the following command to add an entry in the database
 ```
-db.getCollection('Product').save({ "pid": 13860428, "title": "The Big Lebowski (Blu-ray)", "price": "69.87", "currencyCode": "USD" })
+db.getCollection('Product').save({ "productId": 13860428, "title": "The Big Lebowski (Blu-ray)", "price": "69.87", "currencyCode": "USD" })
 ```
 
 ### 4. Build Project using Maven
