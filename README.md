@@ -25,7 +25,13 @@ Build an application that performs the following actions:
 ## MYRETAIL APP
 MyRetail App is configured to run as a Spring Boot application. It is configured to run at http://localhost:8080/product/
 
-### MongoDB and Collection
+### Hosted Access
+
+The App is hosted at https://floating-woodland-99915.herokuapp.com/
+This uses:
+* Heroku Java/Tomcat 
+* Papertail for logging
+* Connection to a MongoDB Atlas cluster
 
 
 ### To start the application
