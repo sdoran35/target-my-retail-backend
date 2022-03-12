@@ -25,6 +25,9 @@ Build an application that performs the following actions:
 ## MYRETAIL APP
 MyRetail App is configured to run as a Spring Boot application. It is configured to run at http://localhost:8080/product/
 
+### MongoDB and Collection
+
+
 ### To start the application
 *If you're using a mac, you can easily download everything using [homebrew](https://brew.sh)
 
