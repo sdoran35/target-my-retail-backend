@@ -11,7 +11,6 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 public class MyRetailApplication {
 
 	public static void main(String[] args) {
-		System.getProperties().put("server.port", 8080);
 		SpringApplication.run(MyRetailApplication.class, args);
 	}
 
