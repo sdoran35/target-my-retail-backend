@@ -21,27 +21,14 @@ This uses:
 
 
 ### To start the application
-*If you're using a mac, you can easily download everything using [homebrew](https://brew.sh)
 
-To get homebrew, simple past the following command into your terminal
-```
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-```
-
-### 1. Verify Java, Update if needed
+### 1. Verify Java
 Open your terminal/command prompt and enter the following command
 ```
 java -version
 ```
+If your java version is 1.8 or higher, then continue below. Otherwise update it to the most recent JDK
 
-If your java version is 1.8 then [continue](https://github.com/tkloetzk/target#2-clone-the-project-from-git). Otherwise update it.
-
-If you're on a windows, follow the instructions [here](https://techhelpkb.com/how-to-update-java-on-your-computer/).
-
-If you're on a mac using homebrew, type this command
-```
-brew cask install java
-```
 
 Verify your verison again.
 ```
@@ -68,6 +55,8 @@ This will install the directory on your home folder
 
 
 ### 3. Install MongoDB
+This step is not needed if using the Heroku hosted version
+
 If you don't have mongoDB installed, refer [here for windows](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/) and [here for mac](https://treehouse.github.io/installation-guides/mac/mongo-mac.html)
 
 Once installed, enter the following command in your terminal/command prompt
@@ -92,6 +81,7 @@ db.getCollection('Product').save({ "productId": 13860428, "title": "The Big Lebo
 ```
 
 ### 4. Build Project using Maven
+This step not needed if using the heroku hosted verison
 
 If you do not have maven installed, you can install it [here.](https://maven.apache.org/download.cgi)
 
@@ -100,18 +90,15 @@ If you're unsure, enter this command in your terminal/command prompt
 mvn -version
 ```
 
-If on a mac using homebrew, you can type the following command to install maven
-```
-brew install maven
-```
-
 Once maven is installed, build the project. (Make sure you are in the folder (ex: /User/Folder/Target))
 ```
 mvn clean install -U
 ```
 
 ### 5. Run the application
-After maven has finished building and was succesful, you'll now have a target folder in your project folder. Navigate inside this folder using terminal/command prompt
+This step not needed if using the heroku hosted version.
+
+After maven has finished building and was successful, you'll now have a target folder in your project folder. Navigate inside this folder using terminal/command prompt
 ```
 cd target
 ```

@@ -15,7 +15,6 @@ import com.redsky.myretail.domain.ProductObject;
 import com.redsky.myretail.dao.ProductDAO;
 import com.redsky.myretail.service.ProductService;
 
-@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/")
 public class ProductDetailsController {
@@ -28,7 +27,13 @@ public class ProductDetailsController {
     @Autowired
     private ProductDAO productDAO;
 
-    // Return JSON representation of Product
+    /**
+     * Return the JSON for the product
+     *
+     * @param id the product id
+     * @return the product
+     * @throws Exception
+     */
     @GetMapping(value = "products/{id}")
     public ResponseEntity<Product> getProductDetailsById(@PathVariable final int id) throws Exception {
         Product product = null;
@@ -52,11 +57,18 @@ public class ProductDetailsController {
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
-    // Update Product's Price
+    /**
+     * Update the price of a various product
+     *
+     * @param productRequest the product to update
+     * @param id the product id
+     * @return the product with an updated price
+     * @throws Exception
+     */
     @PutMapping(value = "products/{id}")
     public ResponseEntity<Product> updateProductPriceById(@RequestBody final Product productRequest,
                                                           @PathVariable final int id) throws Exception {
-        Product product = null;
+        Product product;
 
         try {
             ProductObject productRO = productDAO.productObject(productRequest);
