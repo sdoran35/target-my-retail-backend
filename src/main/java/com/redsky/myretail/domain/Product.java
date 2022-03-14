@@ -15,8 +15,8 @@ public class Product implements Serializable {
     @JsonProperty("id")
     private int id;
 
-    @JsonProperty("name")
-    private String name;
+    @JsonProperty("title")
+    private String title;
 
     @JsonProperty("productPrice")
     private ProductPrice productPrice;
@@ -26,11 +26,11 @@ public class Product implements Serializable {
     }
 
     public Product(final int id,
-                   final String name,
+                   final String title,
                    final ProductPrice productPrice) {
 
         this.id = id;
-        this.name = name;
+        this.title = title;
         this.productPrice = productPrice;
     }
 
@@ -42,12 +42,12 @@ public class Product implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public ProductPrice getProductPrice() {
@@ -63,19 +63,19 @@ public class Product implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Product)) return false;
         Product product = (Product) o;
-        return getId() == product.getId() && getName().equals(product.getName()) && getProductPrice().equals(product.getProductPrice());
+        return getId() == product.getId() && getTitle().equals(product.getTitle()) && getProductPrice().equals(product.getProductPrice());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getProductPrice());
+        return Objects.hash(getId(), getTitle(), getProductPrice());
     }
 
     @Override
     public String toString() {
         return "Product{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", title='" + title + '\'' +
                 ", productPrice=" + productPrice +
                 '}';
     }

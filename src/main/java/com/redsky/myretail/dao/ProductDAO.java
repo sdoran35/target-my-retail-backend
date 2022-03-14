@@ -16,11 +16,11 @@ public class ProductDAO {
             product = new Product();
 
             product.setId(productObject.getProductId());
-            product.setName(productObject.getTitle());
+            product.setTitle(productObject.getTitle());
 
             ProductPrice productPrice = new ProductPrice();
             productPrice.setCurrencyCode(productObject.getCurrencyCode());
-            productPrice.setPrice(productPrice.getPrice());
+            productPrice.setPrice(productObject.getProductPrice());
             product.setProductPrice(productPrice);
         }
 
