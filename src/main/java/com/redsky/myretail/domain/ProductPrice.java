@@ -1,16 +1,22 @@
 package com.redsky.myretail.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class ProductPrice {
+@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class ProductPrice implements Serializable {
+    private static final long serialVersionUID = 1713207791846011342L;
 
-    @JsonProperty("value")
+    @JsonProperty("price")
     protected BigDecimal price;
 
-    @JsonProperty("currency_code")
+    @JsonProperty("currencyCode")
     protected String currencyCode;
 
     public ProductPrice() {

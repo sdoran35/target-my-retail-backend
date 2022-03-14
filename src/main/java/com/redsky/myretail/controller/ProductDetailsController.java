@@ -2,7 +2,6 @@ package com.redsky.myretail.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,27 +15,30 @@ import com.redsky.myretail.dao.ProductDAO;
 import com.redsky.myretail.service.ProductService;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping(value = { "/rest/v1/api", "/v1/api"})
 public class ProductDetailsController {
-
     private final Logger logger = LoggerFactory.getLogger(ProductDetailsController.class);
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
+    private final ProductDAO productDAO;
 
-    @Autowired
-    private ProductDAO productDAO;
+    public ProductDetailsController(final ProductService productService,
+                                    final ProductDAO productDAO) {
+
+        this.productService = productService;
+        this.productDAO = productDAO;
+    }
 
     /**
      * Return the JSON for the product
      *
      * @param id the product id
      * @return the product
-     * @throws Exception
+     * @throws Exception exception
      */
-    @GetMapping(value = "products/{id}")
+    @GetMapping(value = "/products/{id}")
     public ResponseEntity<Product> getProductDetailsById(@PathVariable final int id) throws Exception {
-        Product product = null;
+        Product product;
 
         try {
             product = productService.getProductById(id);
@@ -63,11 +65,10 @@ public class ProductDetailsController {
      * @param productRequest the product to update
      * @param id the product id
      * @return the product with an updated price
-     * @throws Exception
+     * @throws Exception exception
      */
-    @PutMapping(value = "products/{id}")
-    public ResponseEntity<Product> updateProductPriceById(@RequestBody final Product productRequest,
-                                                          @PathVariable final int id) throws Exception {
+    @PutMapping(value = "/products/{id}")
+    public ResponseEntity<Product> updateProductPriceById(@RequestBody final Product productRequest, @PathVariable final int id) throws Exception {
         Product product;
 
         try {
@@ -84,6 +85,7 @@ public class ProductDetailsController {
             logger.error(e.getMessage(), e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 }

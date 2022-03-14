@@ -1,10 +1,16 @@
 package com.redsky.myretail.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Product {
+@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Product implements Serializable {
+    private static final long serialVersionUID = -6192476799660533368L;
 
     @JsonProperty("id")
     private int id;
@@ -12,7 +18,7 @@ public class Product {
     @JsonProperty("name")
     private String name;
 
-    @JsonProperty("product_price")
+    @JsonProperty("productPrice")
     private ProductPrice productPrice;
 
     public Product() {
