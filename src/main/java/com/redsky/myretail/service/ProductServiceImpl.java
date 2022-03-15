@@ -19,10 +19,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 
-@Service
+@Service(value = "productDetailsService")
 public class ProductServiceImpl implements ProductService {
     private final Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
-
 
     private final ProductDAO productDAO;
     private final ProductRepository productRepository;

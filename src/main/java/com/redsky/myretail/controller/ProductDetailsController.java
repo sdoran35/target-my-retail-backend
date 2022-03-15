@@ -52,6 +52,7 @@ public class ProductDetailsController {
             logger.error(ex.getLocalizedMessage(), ex);
             return new ResponseEntity<>(ex.getStatusCode());
         } catch (Exception ex) {
+            //We really should not enter this, otherwise server error
             logger.error(ex.getMessage(), ex);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -82,6 +83,7 @@ public class ProductDetailsController {
             logger.error(ex.getLocalizedMessage(), ex);
             return new ResponseEntity<>(ex.getStatusCode());
         } catch (Exception e) {
+            // We really should not enter this, otherwise server error
             logger.error(e.getMessage(), e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

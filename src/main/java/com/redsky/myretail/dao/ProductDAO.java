@@ -8,13 +8,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductDAO {
 
+    /**
+     * Create a new product
+     *
+     * @param productObject the product object
+     * @return a new product
+     */
     public Product productDetails(final ProductObject productObject) {
 
         Product product = null;
 
         if(productObject != null) {
             product = new Product();
-
             product.setId(productObject.getProductId());
             product.setTitle(productObject.getTitle());
 
@@ -27,6 +32,12 @@ public class ProductDAO {
         return product;
     }
 
+    /**
+     * Create a new product object
+     *
+     * @param product the product
+     * @return a new product object
+     */
     public ProductObject productObject(final Product product) {
         ProductObject productObject = new ProductObject(product.getId());
         productObject.setProductPrice(product.getProductPrice().getPrice());
