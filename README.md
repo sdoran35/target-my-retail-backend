@@ -104,7 +104,7 @@ cd target
 ```
 Run the following command to start the application
 ```
-java -jar myretail-0.0.1-SNAPSHOT.jar
+java -jar myRetail-1.0.0.jar
 ```
 
 The application has now started.

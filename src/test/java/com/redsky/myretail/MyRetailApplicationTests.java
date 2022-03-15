@@ -82,7 +82,7 @@ public class MyRetailApplicationTests {
 	public void testUpdateProductPriceById() throws Exception {
 		Product requestBody = new Product();
 		ProductPrice priceData = new ProductPrice();
-		priceData.setPrice(new BigDecimal("14.95"));
+		priceData.setPrice(new BigDecimal(14.95));
 		requestBody.setId(successfulID);
 		requestBody.setProductPrice(priceData);
 
@@ -115,7 +115,7 @@ public class MyRetailApplicationTests {
 		//Create product price request
 		ProductPrice priceData = new ProductPrice();
 
-		priceData.setPrice(new BigDecimal("14.95"));
+		priceData.setPrice(new BigDecimal(14.95));
 		requestBody.setId(12345678);
 		requestBody.setProductPrice(priceData);
 
