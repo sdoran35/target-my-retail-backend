@@ -7,7 +7,8 @@ import com.redsky.myretail.dao.ProductDAO;
 import com.redsky.myretail.domain.Product;
 import com.redsky.myretail.domain.ProductObject;
 import com.redsky.myretail.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -17,32 +18,44 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
-import java.util.Properties;
 
-@Service
+@Service(value = "productDetailsService")
 public class ProductServiceImpl implements ProductService {
+    private final Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
 
-    @Autowired
-    private ProductDAO productDAO;
+    private final ProductDAO productDAO;
+    private final ProductRepository productRepository;
+    private final RestTemplate restTemplate;
+    private final String apiHost;
 
-    @Autowired
-    private ProductRepository productRepository;
+    public ProductServiceImpl(final ProductDAO productDAO,
+                              final ProductRepository productRepository,
+                              @Value("${api.host:null}") final String apiHost) {
 
-    @Autowired
-    private Properties properties;
+        this.productDAO = productDAO;
+        this.productRepository = productRepository;
+        this.restTemplate = new RestTemplate();
+        this.apiHost = apiHost;
+    }
 
-    RestTemplate restTemplate = new RestTemplate();
-
-    @Value("${api.host:null}")
-    private String apiHost;
-
-    @Value("${api.excludes:null}")
-    private String apiExcludes;
-
+    /**
+     * Return the RedSky API URL
+     *
+     * @param productId the product id
+     * @return RedSky API URL
+     */
     public String getURI(final int productId) {
         return apiHost + productId;
     }
 
+    /**
+     * Get the product using id
+     *
+     * @param id the id
+     * @return return a product
+     * @throws JsonProcessingException json processing exception
+     * @throws IOException io exception
+     */
     public Product getProductById(final int id) throws JsonProcessingException, IOException {
 
         ProductObject productObject = productRepository.findByProductId(id);
@@ -58,6 +71,14 @@ public class ProductServiceImpl implements ProductService {
         return productDAO.productDetails(productObject);
     }
 
+    /**
+     * Get a product title using product id
+     *
+     * @param productId the product id
+     * @return the product title
+     * @throws JsonProcessingException json processing exception
+     * @throws IOException io exception
+     */
     public String getProductTitle(final int productId) throws JsonProcessingException, IOException {
         String responseBody = null;
         String productTitle = null;
@@ -70,17 +91,29 @@ public class ProductServiceImpl implements ProductService {
         JsonNode productRootNode = mapper.readTree(responseBody);
 
         if(productRootNode != null) {
-            productTitle = productRootNode.get("data").get("product").get("item").get("product_description").get("title").asText();
+            productTitle = productRootNode
+                    .get("data")
+                    .get("product")
+                    .get("item")
+                    .get("product_description")
+                    .get("title").asText();
         }
 
         return productTitle;
     }
 
+    /**
+     * Update a product price
+     *
+     * @param productObject the product object
+     * @return the updated product
+     */
     public Product updateProduct(final ProductObject productObject) {
         // get the product from the database
         ProductObject currentProduct = productRepository.findByProductId(productObject.getProductId());
 
         if(currentProduct == null) {
+            logger.info(HttpStatus.NOT_FOUND.getReasonPhrase());
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "404");
         }
 

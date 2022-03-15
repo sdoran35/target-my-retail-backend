@@ -1,28 +1,41 @@
 package com.redsky.myretail.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Document(collection = "Product")
-public class ProductObject {
+public class ProductObject implements Serializable {
+    private static final long serialVersionUID = 1500354080937387825L;
 
     @Id
+    @JsonProperty("id")
     private String id;
 
     @Indexed
+    @JsonProperty("productId")
     private int productId;
 
+    @Field("title")
+    @JsonProperty("title")
     private String title;
 
     @Field("price")
+    @JsonProperty("productPrice")
     private BigDecimal productPrice;
 
     @Field("currencyCode")
+    @JsonProperty("currencyCode")
     private String currencyCode;
 
     private ProductObject() {

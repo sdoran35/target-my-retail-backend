@@ -1,6 +1,5 @@
 package com.redsky.myretail.repository;
 
-
 import com.redsky.myretail.domain.ProductObject;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
@@ -10,8 +9,8 @@ import org.springframework.stereotype.Repository;
 public interface ProductRepository extends MongoRepository<ProductObject, String> {
 
     @Query("{ 'productId' : ?0 }")
-    public ProductObject findByProductId(final int productId);
+    ProductObject findByProductId(final int productId);
 
     @SuppressWarnings("unchecked")
-    public ProductObject save(final ProductObject productObject);
+    ProductObject save(final ProductObject productObject);
 }
