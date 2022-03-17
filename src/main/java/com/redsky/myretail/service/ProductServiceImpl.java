@@ -18,6 +18,8 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.Currency;
 
 @Service(value = "productDetailsService")
 public class ProductServiceImpl implements ProductService {
@@ -117,7 +119,16 @@ public class ProductServiceImpl implements ProductService {
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "404");
         }
 
-        currentProduct.setProductPrice(productObject.getProductPrice());
+        // Verify this is a valid currency
+        if(Currency.getAvailableCurrencies().contains(Currency.getInstance(productObject.getCurrencyCode()))) {
+            currentProduct.setCurrencyCode(productObject.getCurrencyCode());
+        } else {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Invalid currency code");
+        }
+
+        if(productObject.getProductPrice().compareTo(BigDecimal.ZERO) < 0) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Negative price provided");
+        }
 
         // update the product in the database
         ProductObject updatedProduct = productRepository.save(currentProduct);

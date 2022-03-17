@@ -161,3 +161,8 @@ We have now updated the price of the product, and saved our changes to the Mongo
 	}
 }
 ```
+3. Service Health
+
+    You can access `/service-health` with a `name` parameter in the request.
+
+    You can access `/actuator/health` to determine the status of the service.

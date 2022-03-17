@@ -15,8 +15,9 @@ import com.redsky.myretail.dao.ProductDAO;
 import com.redsky.myretail.service.ProductService;
 
 @RestController
-@RequestMapping(value = { "/rest/v1/api", "/v1/api"})
+@RequestMapping(value = { "/v1/api" })
 public class ProductDetailsController {
+    //TODO look into Spring Security
     private final Logger logger = LoggerFactory.getLogger(ProductDetailsController.class);
 
     private final ProductService productService;
@@ -72,6 +73,7 @@ public class ProductDetailsController {
     public ResponseEntity<Product> updateProductPriceById(@RequestBody final Product productRequest, @PathVariable final int id) throws Exception {
         Product product;
 
+        //TODO handle negative case, return message to client
         try {
             ProductObject productRO = productDAO.productObject(productRequest);
             product = productService.updateProduct(productRO);
